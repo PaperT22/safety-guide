@@ -12,32 +12,52 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .top-bar {
   background: #C0392B;
   color: white;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  padding: 12px 16px 10px;
   position: sticky;
   top: 0;
   z-index: 10;
 }
-.top-bar i { font-size: 20px; }
-.top-bar-text { flex: 1; }
-.top-bar-label { font-size: 11px; opacity: 0.85; }
-.top-bar-number { font-size: 18px; font-weight: 500; letter-spacing: 1px; }
+.top-bar-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.top-bar-header i { font-size: 16px; opacity: 0.9; }
+.top-bar-header span { font-size: 12px; opacity: 0.9; font-weight: 500; letter-spacing: 0.3px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+.contact-item {
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.contact-info { flex: 1; min-width: 0; }
+.contact-role { font-size: 10px; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.contact-number { font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
 .call-btn {
   background: white;
   color: #C0392B;
   border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 13px;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
   text-decoration: none;
+  flex-shrink: 0;
 }
+.call-btn i { font-size: 13px; }
 
 .divider { height: 8px; background: #f5f5f5; }
 
@@ -53,24 +73,40 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 0 16px 16px;
 }
 .cat-btn {
   background: white;
-  border: 1px solid #e0e0e0;
+  border: 1.5px solid #e0e0e0;
   border-radius: 12px;
-  padding: 14px 10px;
+  padding: 14px 6px;
   cursor: pointer;
   text-align: center;
-  transition: border-color 0.15s;
+  transition: opacity 0.15s;
 }
-.cat-btn.active { border: 2px solid #C0392B; }
-.cat-btn i { font-size: 22px; color: #888; display: block; margin-bottom: 6px; }
-.cat-btn.active i { color: #C0392B; }
-.cat-btn span { font-size: 13px; font-weight: 500; color: #222; display: block; }
-.cat-btn small { font-size: 11px; color: #aaa; display: block; margin-top: 2px; }
+.cat-btn i { font-size: 22px; display: block; margin-bottom: 6px; }
+.cat-btn span { font-size: 12px; font-weight: 600; display: block; }
+.cat-btn small { font-size: 10px; display: block; margin-top: 3px; opacity: 0.75; }
+
+.cat-btn.machine { background: #FFF3E0; border-color: #E65100; }
+.cat-btn.machine i, .cat-btn.machine span { color: #E65100; }
+.cat-btn.machine small { color: #E65100; }
+.cat-btn.machine.active { background: #E65100; border-color: #E65100; }
+.cat-btn.machine.active i, .cat-btn.machine.active span, .cat-btn.machine.active small { color: white; }
+
+.cat-btn.service { background: #E8F5E9; border-color: #2E7D32; }
+.cat-btn.service i, .cat-btn.service span { color: #2E7D32; }
+.cat-btn.service small { color: #2E7D32; }
+.cat-btn.service.active { background: #2E7D32; border-color: #2E7D32; }
+.cat-btn.service.active i, .cat-btn.service.active span, .cat-btn.service.active small { color: white; }
+
+.cat-btn.office { background: #E3F2FD; border-color: #1565C0; }
+.cat-btn.office i, .cat-btn.office span { color: #1565C0; }
+.cat-btn.office small { color: #1565C0; }
+.cat-btn.office.active { background: #1565C0; border-color: #1565C0; }
+.cat-btn.office.active i, .cat-btn.office.active span, .cat-btn.office.active small { color: white; }
 
 .video-list { padding: 0 16px 16px; display: none; }
 .video-list.visible { display: block; }
@@ -127,7 +163,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   border-radius: 12px;
   overflow: hidden;
   background: #000;
-  aspect-ratio: 16/11;
+  aspect-ratio: 16/13;
   width: 100%;
 }
 .video-frame iframe { width: 100%; height: 100%; border: none; display: block; }
@@ -148,14 +184,40 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <body>
 
 <div class="top-bar">
-  <i class="ti ti-shield-check"></i>
-  <div class="top-bar-text">
-    <div class="top-bar-label">지도교사 긴급연락처</div>
-    <div class="top-bar-number">010-0000-0000</div>
+  <div class="top-bar-header">
+    <i class="ti ti-shield-check"></i>
+    <span>비상연락망</span>
   </div>
-  <a class="call-btn" href="tel:01000000000">
-    <i class="ti ti-phone"></i>전화
-  </a>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-info">
+        <div class="contact-role">기업현장교사</div>
+        <div class="contact-number">010-0000-0000</div>
+      </div>
+      <a class="call-btn" href="tel:01000000000"><i class="ti ti-phone"></i>전화</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <div class="contact-role">학교담당교사</div>
+        <div class="contact-number">010-0000-0000</div>
+      </div>
+      <a class="call-btn" href="tel:01000000000"><i class="ti ti-phone"></i>전화</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <div class="contact-role">부당대우 신고센터</div>
+        <div class="contact-number">053-231-8152</div>
+      </div>
+      <a class="call-btn" href="tel:0532318152"><i class="ti ti-phone"></i>전화</a>
+    </div>
+    <div class="contact-item">
+      <div class="contact-info">
+        <div class="contact-role">근로권익센터</div>
+        <div class="contact-number">1644-3119</div>
+      </div>
+      <a class="call-btn" href="tel:16443119"><i class="ti ti-phone"></i>전화</a>
+    </div>
+  </div>
 </div>
 
 <div class="divider"></div>
@@ -166,115 +228,118 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </div>
 
   <div class="category-grid">
-    <button class="cat-btn" onclick="selectCat('service')">
-      <i class="ti ti-building-store"></i>
-      <span>서비스직</span>
-      <small>4개 영상</small>
-    </button>
-    <button class="cat-btn" onclick="selectCat('office')">
-      <i class="ti ti-device-desktop"></i>
-      <span>사무직</span>
-      <small>1개 영상</small>
-    </button>
-    <button class="cat-btn" onclick="selectCat('machine')">
+    <button class="cat-btn machine" onclick="selectCat('machine')">
       <i class="ti ti-settings"></i>
       <span>기계제조업</span>
-      <small>11개 영상</small>
+      <small>12개 영상</small>
     </button>
-    <button class="cat-btn" onclick="selectCat('common')">
-      <i class="ti ti-alert-triangle"></i>
-      <span>공통</span>
-      <small>3개 영상</small>
+    <button class="cat-btn service" onclick="selectCat('service')">
+      <i class="ti ti-building-store"></i>
+      <span>서비스직</span>
+      <small>5개 영상</small>
+    </button>
+    <button class="cat-btn office" onclick="selectCat('office')">
+      <i class="ti ti-device-desktop"></i>
+      <span>사무직</span>
+      <small>2개 영상</small>
     </button>
   </div>
 
   <div id="video-list-service" class="video-list">
     <div class="video-list-title"><i class="ti ti-building-store"></i> 서비스직</div>
-    <button class="video-item" onclick="playVideo('주방조리 안전교육', '화상', '1Q_XT0BZQgitMUXl9r-sOQE9hTW3GVnL5')">
+    <button class="video-item" onclick="playVideo('주방조리 안전교육', '화상', 'ZKTUMJeMiwc')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">주방조리 안전교육</div><div class="video-item-tag">위험요인: 화상</div></div>
+      <div><div class="video-item-name">주방조리 안전교육 1</div><div class="video-item-tag">위험요인: 화상</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('주방조리 안전교육', '끼임·감김·말림', '1A7koyNFnmPs4BeUipuA61H0fgT4x8-r-')">
+    <button class="video-item" onclick="playVideo('주방조리 안전교육', '끼임·감김·말림', 'KZs0S-FiaaE')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">주방조리 안전교육</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
+      <div><div class="video-item-name">주방조리 안전교육 2</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('음식서비스 안전교육', '추락·넘어짐', '1uZsjOGaQ7Lg2F0bffVSkzdmGwulGWNoR')">
+    <button class="video-item" onclick="playVideo('음식서비스 안전교육', '추락·넘어짐', 'nCGk4VpZgUk')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">음식서비스 안전교육</div><div class="video-item-tag">위험요인: 추락·넘어짐</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('감정노동 안전교육', '신체·중증장애', '1p_QfX0jBuK970rU9Hg3uhye0d6-L5YqX')">
+    <button class="video-item" onclick="playVideo('감정노동 안전교육', '신체·중증장애', 'FJ3qmHoFoYc')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">감정노동 안전교육</div><div class="video-item-tag">위험요인: 신체·중증장애</div></div>
+    </button>
+    <button class="video-item" onclick="playVideo('전기·기계 취급 안전교육', '감전', 'a_NxX2gWCas')">
+      <i class="ti ti-player-play"></i>
+      <div><div class="video-item-name">전기·기계 취급 안전교육</div><div class="video-item-tag">위험요인: 감전</div></div>
     </button>
   </div>
 
   <div id="video-list-office" class="video-list">
     <div class="video-list-title"><i class="ti ti-device-desktop"></i> 사무직</div>
-    <button class="video-item" onclick="playVideo('전산작업 안전교육', '신체·중증장애', '1aLhqzyePBCJ_2zCjEIfVUDB3VA4fwKey')">
+    <button class="video-item" onclick="playVideo('전산작업 안전교육', '신체·중증장애', 'YbZC87cemlo')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">전산작업 안전교육</div><div class="video-item-tag">위험요인: 신체·중증장애</div></div>
+    </button>
+    <button class="video-item" onclick="playVideo('전기·기계 취급 안전교육', '감전', 'a_NxX2gWCas')">
+      <i class="ti ti-player-play"></i>
+      <div><div class="video-item-name">전기·기계 취급 안전교육</div><div class="video-item-tag">위험요인: 감전</div></div>
     </button>
   </div>
 
   <div id="video-list-machine" class="video-list">
     <div class="video-list-title"><i class="ti ti-settings"></i> 기계제조업</div>
-    <button class="video-item" onclick="playVideo('컨베이어벨트 안전교육', '끼임·감김·말림', '1qLlODSHT6TBbv8qQH06tE-KJ53_vPbM9')">
+    <button class="video-item" onclick="playVideo('컨베이어벨트 안전교육', '끼임·감김·말림', '07408sHmiNY')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">컨베이어벨트 안전교육</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('차량계 하역운반 안전교육', '충돌·타격', '1w8XTG3P6URQh6EuyoTczUbn_Cq809vhD')">
+    <button class="video-item" onclick="playVideo('차량계 하역운반 안전교육', '충돌·타격', '1a8gs7KKkTU')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">차량계 하역운반 안전교육</div><div class="video-item-tag">위험요인: 충돌·타격</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('연삭기 안전교육', '폭발', '1NKwcSvBFD7pr7gc9mp8_MUATNV2XiwrO')">
+    <button class="video-item" onclick="playVideo('연삭기 안전교육', '폭발', 'qW6oWht6Q4E')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">연삭기 안전교육</div><div class="video-item-tag">위험요인: 폭발</div></div>
+      <div><div class="video-item-name">연삭기 안전교육 1</div><div class="video-item-tag">위험요인: 폭발</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('연삭기 안전교육', '충돌·타격', '13XUebgNA4l5K-jIskg59ZnUsKTzltg8a')">
+    <button class="video-item" onclick="playVideo('연삭기 안전교육', '충돌·타격', 'LMfBxFiGfa0')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">연삭기 안전교육</div><div class="video-item-tag">위험요인: 충돌·타격</div></div>
+      <div><div class="video-item-name">연삭기 안전교육 2</div><div class="video-item-tag">위험요인: 충돌·타격</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('선반 안전교육', '충돌·타격', '1NbzRk61WJr2_KBXzOIY_dMt0KmNLVxnV')">
+    <button class="video-item" onclick="playVideo('선반 안전교육', '충돌·타격', 'j5PYgLKKZ1M')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">선반 안전교육</div><div class="video-item-tag">위험요인: 충돌·타격</div></div>
+      <div><div class="video-item-name">선반 안전교육 1</div><div class="video-item-tag">위험요인: 충돌·타격</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('선반 안전교육', '끼임·감김·말림', '1j79ZsXVQA_qBwUYmtoCkfw8eYB3Blz52')">
+    <button class="video-item" onclick="playVideo('선반 안전교육', '끼임·감김·말림', '8s3BDX6ARCw')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">선반 안전교육</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
+      <div><div class="video-item-name">선반 안전교육 2</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('산업용 로봇 안전교육', '충돌·타격', '1GjtRNcsJi7iHxwuwVM7cQaURAOXq34za')">
+    <button class="video-item" onclick="playVideo('산업용 로봇 안전교육', '충돌·타격', 'eeBsuQIWLJc')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">산업용 로봇 안전교육</div><div class="video-item-tag">위험요인: 충돌·타격</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('밀링 안전교육', '절단·베임·찔림', '1GnUW0iAHh6beatKlSELuKbSx2jKGuUyY')">
+    <button class="video-item" onclick="playVideo('밀링 안전교육', '절단·베임·찔림', 'seTUOujlQGM')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">밀링 안전교육</div><div class="video-item-tag">위험요인: 절단·베임·찔림</div></div>
+      <div><div class="video-item-name">밀링 안전교육 1</div><div class="video-item-tag">위험요인: 절단·베임·찔림</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('밀링 안전교육', '끼임·감김·말림', '1qggC2p4d_6wFQctluOeV2x9gNTqqcDwG')">
+    <button class="video-item" onclick="playVideo('밀링 안전교육', '끼임·감김·말림', 'yw4gKcR9koc')">
       <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">밀링 안전교육</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
+      <div><div class="video-item-name">밀링 안전교육 2</div><div class="video-item-tag">위험요인: 끼임·감김·말림</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('물건운반 안전교육', '추락·넘어짐', '1NkTToHiVT_asmF0Ia2qKZvfqA3rRJSkL')">
+    <button class="video-item" onclick="playVideo('물건운반 안전교육', '추락·넘어짐', 'sAVyaoMVf0Q')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">물건운반 안전교육</div><div class="video-item-tag">위험요인: 추락·넘어짐</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('가스용접 절단 안전교육', '화상', '1KWf0tHr7cTW4jkJzyA9YZkfKTG1XhV4I')">
+    <button class="video-item" onclick="playVideo('가스용접 절단 안전교육', '화상', 'jA9l5N77Nmg')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">가스용접 절단 안전교육</div><div class="video-item-tag">위험요인: 화상</div></div>
     </button>
-  </div>
-
-  <div id="video-list-common" class="video-list">
-    <div class="video-list-title"><i class="ti ti-alert-triangle"></i> 공통</div>
-    <button class="video-item" onclick="playVideo('LMS 실습일지 작성 안내', '공통 안내', '1Ohqp4Cg2eorMbZQhrvRrrN2wUejkXS4H')">
-      <i class="ti ti-player-play"></i>
-      <div><div class="video-item-name">LMS 실습일지 작성 안내</div><div class="video-item-tag">공통 안내</div></div>
-    </button>
-    <button class="video-item" onclick="playVideo('전기·기계 취급 안전교육', '감전', '1HcpND-30mM_CJk8dy84voPQcdzuYN37s')">
+    <button class="video-item" onclick="playVideo('전기·기계 취급 안전교육', '감전', 'a_NxX2gWCas')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">전기·기계 취급 안전교육</div><div class="video-item-tag">위험요인: 감전</div></div>
     </button>
-    <button class="video-item" onclick="playVideo('사고 발생 시 대처방법', '공통 필수 시청', '1ZyUh6RW-KkyBOQbIf-NBgGw3FylpoFB7')">
+  </div>
+
+  <div id="video-list-common" class="video-list visible" style="display:block !important; border-top: 1px solid #e0e0e0; margin-top: 4px; padding-top: 4px;">
+    <div class="video-list-title"><i class="ti ti-alert-triangle"></i> 공통 — 전원 필수 시청</div>
+    <button class="video-item" onclick="playVideo('LMS 실습일지 작성 안내', '공통 안내', 'Id6GFhurCWU')">
+      <i class="ti ti-player-play"></i>
+      <div><div class="video-item-name">LMS 실습일지 작성 안내</div><div class="video-item-tag">공통 안내</div></div>
+    </button>
+    <button class="video-item" onclick="playVideo('사고 발생 시 대처방법', '공통 필수 시청', 'v1YAIEmrPsA')">
       <i class="ti ti-player-play"></i>
       <div><div class="video-item-name">사고 발생 시 대처방법</div><div class="video-item-tag">공통 필수 시청</div></div>
     </button>
@@ -291,15 +356,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="video-frame">
     <iframe id="video-iframe" allowfullscreen allow="autoplay"></iframe>
   </div>
-  <div class="notice-box">
-    <i class="ti ti-info-circle"></i>
-    <span>영상이 재생되지 않으면 구글 드라이브 로그인 후 다시 시도해주세요.</span>
-  </div>
 </div>
 
 <script>
 function selectCat(cat) {
-  var cats = ['service','office','machine','common'];
+  var cats = ['machine','service','office'];
   var btns = document.querySelectorAll('.cat-btn');
   cats.forEach(function(c, i) {
     var list = document.getElementById('video-list-' + c);
@@ -315,7 +376,7 @@ function selectCat(cat) {
 
 function playVideo(name, risk, fileId) {
   document.getElementById('player-title').textContent = name + ' — ' + risk;
-  document.getElementById('video-iframe').src = 'https://drive.google.com/file/d/' + fileId + '/preview';
+  document.getElementById('video-iframe').src = 'https://www.youtube.com/embed/' + fileId + '?autoplay=1';
   document.getElementById('main-view').style.display = 'none';
   document.getElementById('player-view').classList.add('visible');
   window.scrollTo(0, 0);
