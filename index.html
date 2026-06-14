@@ -194,28 +194,28 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <div class="contact-role">기업현장교사</div>
         <div class="contact-number">010-0000-0000</div>
       </div>
-      <a class="call-btn" href="tel:01000000000"><i class="ti ti-phone"></i>전화</a>
+      <a class="call-btn" href="tel:01000000000" onclick="logCall('기업현장교사')"><i class="ti ti-phone"></i>전화</a>
     </div>
     <div class="contact-item">
       <div class="contact-info">
         <div class="contact-role">학교담당교사</div>
         <div class="contact-number">010-0000-0000</div>
       </div>
-      <a class="call-btn" href="tel:01000000000"><i class="ti ti-phone"></i>전화</a>
+      <a class="call-btn" href="tel:01000000000" onclick="logCall('학교담당교사')"><i class="ti ti-phone"></i>전화</a>
     </div>
     <div class="contact-item">
       <div class="contact-info">
         <div class="contact-role">부당대우 신고센터</div>
         <div class="contact-number">053-231-8152</div>
       </div>
-      <a class="call-btn" href="tel:0532318152"><i class="ti ti-phone"></i>전화</a>
+      <a class="call-btn" href="tel:0532318152" onclick="logCall('부당대우 신고센터')"><i class="ti ti-phone"></i>전화</a>
     </div>
     <div class="contact-item">
       <div class="contact-info">
         <div class="contact-role">근로권익센터</div>
         <div class="contact-number">1644-3119</div>
       </div>
-      <a class="call-btn" href="tel:16443119"><i class="ti ti-phone"></i>전화</a>
+      <a class="call-btn" href="tel:16443119" onclick="logCall('근로권익센터')"><i class="ti ti-phone"></i>전화</a>
     </div>
   </div>
 </div>
@@ -417,6 +417,17 @@ async function logClick(videoName, risk) {
   } catch(e) {}
 }
 
+// 전화 버튼 클릭 기록
+async function logCall(contactName) {
+  try {
+    await addDoc(collection(db, 'calls'), {
+      contactName: contactName,
+      timestamp: serverTimestamp()
+    });
+  } catch(e) {}
+}
+window.logCall = logCall;
+
 logVisit();
 
 window.selectCat = function(cat) {
@@ -463,7 +474,7 @@ window.closeAdminModal = function() {
 
 window.checkPassword = function() {
   const pw = document.getElementById('admin-pw-input').value;
-  if (pw === '0000') {
+  if (pw === '50680') {
     window.location.href = 'admin.html';
   } else {
     document.getElementById('admin-pw-error').style.display = 'block';
