@@ -225,6 +225,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="chart-wrap"><canvas id="hourChart"></canvas></div>
   </div>
 
+  <div class="section-title">비상연락망 통계</div>
+
+  <div class="card">
+    <div class="card-title"><i class="ti ti-phone"></i>연락처별 전화 클릭 횟수</div>
+    <ul class="rank-list" id="call-list">
+      <li class="loading">데이터 불러오는 중...</li>
+    </ul>
+  </div>
+
   <div class="section-title">영상 통계</div>
 
   <div class="card">
@@ -293,6 +302,31 @@ window.loadData = async function() {
 
   document.getElementById('today-clicks').textContent = clicks.filter(c => c.date >= todayStart).length;
   document.getElementById('total-clicks').textContent = clicks.length;
+
+  // 전화 클릭 통계
+  const callSnap = await getDocs(collection(db, 'calls'));
+  const calls = [];
+  callSnap.forEach(doc => {
+    const d = doc.data();
+    if (d.timestamp) calls.push({ ...d, date: d.timestamp.toDate() });
+  });
+
+  const callOrder = ['기업현장교사', '학교담당교사', '부당대우 신고센터', '근로권익센터'];
+  const callCount = {};
+  callOrder.forEach(name => callCount[name] = 0);
+  calls.forEach(c => {
+    if (callCount[c.contactName] !== undefined) callCount[c.contactName]++;
+  });
+
+  const callColors = ['#C0392B', '#E65100', '#1565C0', '#2E7D32'];
+  const callList = document.getElementById('call-list');
+  callList.innerHTML = callOrder.map((name, i) =>
+    `<li class="rank-item">
+      <div class="rank-num" style="background:${callColors[i]};color:white;">${i+1}</div>
+      <div class="rank-name">${name}</div>
+      <div class="rank-count">${callCount[name]}회</div>
+    </li>`
+  ).join('');
 
   // 7일 접속자
   const days7 = [], days7Labels = [];
